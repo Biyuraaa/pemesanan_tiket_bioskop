@@ -1,0 +1,27 @@
+@startuml activity_diagram_booking
+|User|
+start
+:Select Now Playing Section;
+|System|
+:Show Now Playing Movies;
+|User|
+:Choose a Movie;
+|System|
+:Show Movie Details;
+|User|
+:Buy Ticket;
+|System|
+:Show Cinemas;
+|User|
+:Select Cinema;
+|System|
+:Show Available Schedules;
+|User|
+:Select Schedule;
+|System|
+:Show Available Seats;
+|User|
+:Select Seats;
+:Confirm Booking;
+stop
+@enduml

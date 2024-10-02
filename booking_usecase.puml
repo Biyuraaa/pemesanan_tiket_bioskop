@@ -1,0 +1,36 @@
+@startuml booking
+actor User
+actor Sistem
+
+
+rectangle "Proses Pemesanan Tiket" {
+    User -right-> (Select Now Playing Section)
+    User -right-> (Choose a Movie)
+    User -right-> (Buy Ticket)
+    User -right-> (Select Cinema)
+    User -right-> (Select Schedule)
+    User -right-> (Select Seats)
+    User -right-> (Choose Payment Method)
+
+    Sistem -left-> (Show Now Playing Movies)
+    Sistem -left-> (Show Movie Details)
+    Sistem -left-> (Show Cinemas)
+    Sistem -left-> (Show Available Schedules)
+    Sistem -left-> (Show Available Seats)
+
+
+    (Select Now Playing Section) .-> (Show Now Playing Movies) : <<include>>
+    (Choose a Movie) .-> (Show Movie Details) : <<include>>
+    (Buy Ticket) .-> (Show Cinemas) : <<include>>
+    (Select Cinema) .-> (Show Available Schedules) : <<include>>
+    (Select Schedule) .-> (Show Available Seats) : <<include>>
+
+    (Show Now Playing Movies) .> (Choose a Movie) : <<include>>
+    (Show Movie Details) .> (Buy Ticket) : <<include>>
+    (Show Cinemas) .> (Select Cinema) : <<include>>
+    (Show Available Schedules) .> (Select Schedule) : <<include>>
+    (Show Available Seats) .> (Select Seats) : <<include>>
+    (Select Seats) --> (Choose Payment Method)
+
+@enduml
+

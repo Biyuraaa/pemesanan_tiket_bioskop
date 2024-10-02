@@ -1,0 +1,88 @@
+@startuml Booking Sequence Diagram
+
+skinparam style strictuml
+actor User
+boundary NowPlayingPage
+boundary MovieDetailsPage
+boundary CinemaSelectionPage
+boundary ScheduleSelectionPage
+boundary SeatSelectionPage
+control BookingController
+entity Movies
+entity Cinemas
+entity Schedules
+entity Seats
+
+User -> NowPlayingPage: Select Now Playing Section
+activate NowPlayingPage
+NowPlayingPage -> BookingController: Get Now Playing Movies
+activate BookingController
+BookingController -> Movies: Fetch Now Playing Movies
+activate Movies
+Movies --> BookingController: Return Now Playing Movies
+deactivate Movies
+BookingController --> NowPlayingPage: Display Now Playing Movies
+deactivate BookingController
+deactivate NowPlayingPage
+
+User -> NowPlayingPage: Choose a Movie
+activate NowPlayingPage
+NowPlayingPage -> BookingController: Get Movie Details
+activate BookingController
+BookingController -> Movies: Fetch Movie Details
+activate Movies
+Movies --> BookingController: Return Movie Details
+deactivate Movies
+BookingController --> MovieDetailsPage: Display Movie Details
+deactivate BookingController
+deactivate NowPlayingPage
+
+User -> MovieDetailsPage: Buy Ticket
+activate MovieDetailsPage
+MovieDetailsPage -> BookingController: Select Cinema
+activate BookingController
+BookingController -> Cinemas: Fetch Cinemas
+activate Cinemas
+Cinemas --> BookingController: Return Cinemas
+deactivate Cinemas
+BookingController --> CinemaSelectionPage: Display Cinemas
+deactivate BookingController
+deactivate MovieDetailsPage
+
+User -> CinemaSelectionPage: Select Cinema
+activate CinemaSelectionPage
+CinemaSelectionPage -> BookingController: Get Available Schedules
+activate BookingController
+BookingController -> Schedules: Fetch Schedules
+activate Schedules
+Schedules --> BookingController: Return Available Schedules
+deactivate Schedules
+BookingController --> ScheduleSelectionPage: Display Available Schedules
+deactivate BookingController
+deactivate CinemaSelectionPage
+
+User -> ScheduleSelectionPage: Select Schedule
+activate ScheduleSelectionPage
+ScheduleSelectionPage -> BookingController: Get Available Seats
+activate BookingController
+BookingController -> Seats: Fetch Available Seats
+activate Seats
+Seats --> BookingController: Return Available Seats
+deactivate Seats
+BookingController --> SeatSelectionPage: Display Available Seats
+deactivate BookingController
+deactivate ScheduleSelectionPage
+
+User -> SeatSelectionPage: Select Seats
+activate SeatSelectionPage
+SeatSelectionPage -> BookingController: Confirm Booking
+activate BookingController
+BookingController -> Movies: Save Booking Information
+activate Movies
+Movies --> BookingController: Booking Confirmed
+deactivate Movies
+BookingController --> SeatSelectionPage: Display Booking Confirmation
+deactivate BookingController
+deactivate SeatSelectionPage
+
+@enduml

@@ -1,0 +1,18 @@
+  @startuml payment_activity_diagram
+  |User|
+  start
+  :Choose Payment Method;
+  |System|
+  :Show Payment Methods;
+  |User|
+  :Enter Payment Details;
+  |System|
+  :Process Payment;
+  |System|
+  :Payment Confirmation;
+  |System|
+  :Show Ticket;
+  |User|
+  :Print Ticket;
+  stop
+  @enduml

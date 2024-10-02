@@ -1,0 +1,24 @@
+@startuml payment
+actor User
+actor System
+
+rectangle "Proses Pembayaran dan Cetak Tiket" {
+    User -right-> (Choose Payment Method)
+    User -right-> (Enter Payment Details)
+
+    User -right-> (Print Ticket)
+
+    System -left-> (Show Payment Methods)
+    System -left-> (Process Payment)
+    System -left-> (Payment Confirmation)
+    System -left-> (Show Ticket)
+
+    (Choose Payment Method) .right-> (Show Payment Methods) : <<include>>
+    (Show Payment Methods) .-> (Enter Payment Details) : <<include>>
+    (Enter Payment Details) .-> (Process Payment) : <<include>>
+    (Process Payment) .left-> (Payment Confirmation) : <<include>>
+    (Payment Confirmation) .-> (Show Ticket) : <<include>>
+    (Show Ticket) .-> (Print Ticket) : <<include>>
+}
+
+@enduml

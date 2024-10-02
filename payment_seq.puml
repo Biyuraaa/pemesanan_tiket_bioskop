@@ -1,0 +1,47 @@
+@startuml Payment Sequence Diagram
+actor User
+boundary PaymentPage
+control PaymentController
+entity PaymentMethods
+entity PaymentGateway
+entity Ticket
+
+skinparam style strictuml
+
+User -> PaymentPage: Choose Payment Method
+activate PaymentPage
+PaymentPage -> PaymentController: Display Payment Methods
+activate PaymentController
+PaymentController -> PaymentMethods: Fetch Available Methods
+activate PaymentMethods
+PaymentMethods --> PaymentController: Return Payment Methods
+deactivate PaymentMethods
+PaymentController --> PaymentPage: Display Available Methods
+deactivate PaymentController
+deactivate PaymentPage
+
+User -> PaymentPage: Enter Payment Details
+activate PaymentPage
+PaymentPage -> PaymentController: Process Payment
+activate PaymentController
+PaymentController -> PaymentGateway: Submit Payment Details
+activate PaymentGateway
+PaymentGateway --> PaymentController: Payment Successful
+deactivate PaymentGateway
+PaymentController --> PaymentPage: Show Payment Confirmation
+deactivate PaymentController
+deactivate PaymentPage
+
+User -> PaymentPage: Print Ticket
+activate PaymentPage
+PaymentPage -> PaymentController: Request Ticket
+activate PaymentController
+PaymentController -> Ticket: Fetch Ticket Details
+activate Ticket
+Ticket --> PaymentController: Return Ticket Details
+deactivate Ticket
+PaymentController --> PaymentPage: Display Ticket
+deactivate PaymentController
+deactivate PaymentPage
+
+@enduml
